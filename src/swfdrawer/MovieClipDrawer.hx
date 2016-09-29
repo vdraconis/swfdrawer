@@ -1,8 +1,8 @@
 package swfdrawer;
 
 
-import flash.geom.Matrix;
-import flash.geom.Rectangle;
+import openfl.geom.Matrix;
+import openfl.geom.Rectangle;
 import swfdata.DisplayObjectData;
 import swfdata.IDisplayObjectContainer;
 import swfdata.MovieClipData;
