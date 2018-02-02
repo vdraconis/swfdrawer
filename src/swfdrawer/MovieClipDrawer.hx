@@ -12,39 +12,39 @@ import swfdrawer.IDrawer;
 
 class MovieClipDrawer implements IDrawer
 {
-    private var matricesPool : DrawerMatrixPool = DrawerMatrixPool.instance;
+    private var matricesPool:DrawerMatrixPool = DrawerMatrixPool.instance;
     
-    private var displayListDrawer : IDrawer;
+    private var displayListDrawer:IDrawer;
     
-    public function new(displayListDrawer : IDrawer)
+    public function new(displayListDrawer:IDrawer)
     {
         this.displayListDrawer = displayListDrawer;
     }
     
-    public function draw(drawable : DisplayObjectData, drawingData : DrawingData) : Void
+    public function draw(drawable:DisplayObjectData, drawingData:DrawingData):Void
     {
-        var movieClipDrawable : MovieClipData = cast(drawable, MovieClipData);
+        var movieClipDrawable:MovieClipData = cast(drawable, MovieClipData);
         
-        var calculateMyFrame : Int = 0;
+        var calculateMyFrame:Int = 0;
         
-        var frameData : IDisplayObjectContainer = movieClipDrawable.timeline.currentFrameData();
+        var frameData:IDisplayObjectContainer = movieClipDrawable.timeline.currentFrameData();
         
-        var drawableTransformClone : Matrix = matricesPool.getMatrix();
+        var drawableTransformClone:Matrix = matricesPool.getMatrix();
         
-        var drawableTrasnform : Matrix = drawable.transform;
+        var drawableTrasnform:Matrix = drawable.transform;
         drawableTransformClone.setTo(drawableTrasnform.a, drawableTrasnform.b, drawableTrasnform.c, drawableTrasnform.d, drawableTrasnform.tx, drawableTrasnform.ty);
         drawableTransformClone.concat(drawingData.transform);
         
-        var objectsLenght : Int = frameData.displayObjects.length;
+        var objectsLenght:Int = frameData.displayObjects.length;
         
         drawingData.setFromDisplayObject(drawable);
         
         //TODO: Дублирвоания того же кода что в спрайт дравер, нужно как то их сшить воедино
-        var currentMaskState : Bool = drawingData.isMask;
-        var currentMaskedState : Bool = drawingData.isMasked;
+        var currentMaskState:Bool = drawingData.isMask;
+        var currentMaskedState:Bool = drawingData.isMasked;
         
         for (i in 0...objectsLenght){
-            var childDisplayObject : DisplayObjectData = frameData.displayObjects[i];
+            var childDisplayObject:DisplayObjectData = frameData.displayObjects[i];
             
             drawingData.transform = drawableTransformClone;
             

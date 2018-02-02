@@ -13,29 +13,29 @@ import swfdrawer.IDrawer;
 
 class SpriteDrawer implements IDrawer
 {
-    private var matricesPool : DrawerMatrixPool = DrawerMatrixPool.instance;
+    private var matricesPool:DrawerMatrixPool = DrawerMatrixPool.instance;
     
-    private var displayListDrawer : IDrawer;
+    private var displayListDrawer:IDrawer;
     
-    public function new(displayListDrawer : IDrawer)
+    public function new(displayListDrawer:IDrawer)
     {
         this.displayListDrawer = displayListDrawer;
     }
     
-    public function draw(drawable : DisplayObjectData, drawingData : DrawingData) : Void
+    public function draw(drawable:DisplayObjectData, drawingData:DrawingData):Void
     {
-        var spriteDrawable : SpriteData = cast(drawable, SpriteData);
+        var spriteDrawable:SpriteData = cast(drawable, SpriteData);
         
-        var frameData : IDisplayObjectContainer = spriteDrawable;
+        var frameData:IDisplayObjectContainer = spriteDrawable;
         
-        var drawableTransformClone : Matrix = matricesPool.getMatrix();
+        var drawableTransformClone:Matrix = matricesPool.getMatrix();
         
-        var drawableTrasnform : Matrix = drawable.transform;
+        var drawableTrasnform:Matrix = drawable.transform;
         
         drawableTransformClone.setTo(drawableTrasnform.a, drawableTrasnform.b, drawableTrasnform.c, drawableTrasnform.d, drawableTrasnform.tx, drawableTrasnform.ty);
         drawableTransformClone.concat(drawingData.transform);
         
-        var objectsLenght : Int = frameData.displayObjects.length;
+        var objectsLenght:Int = frameData.displayObjects.length;
         
         drawingData.setFromDisplayObject(drawable);
         
@@ -61,12 +61,12 @@ class SpriteDrawer implements IDrawer
 					matrix = drawingData.colorTransform.matrix.slice();
 			*/  //Disabled color transofrm;  
         
-        var currentMaskState : Bool = drawingData.isMask;
-        var currentMaskedState : Bool = drawingData.isMasked;
+        var currentMaskState:Bool = drawingData.isMask;
+        var currentMaskedState:Bool = drawingData.isMasked;
         
         for (i in 0...objectsLenght)
 		{
-            var childDisplayObject : DisplayObjectData = frameData.displayObjects[i];
+            var childDisplayObject:DisplayObjectData = frameData.displayObjects[i];
             
             //if (isApplyColorTransform)
             //{

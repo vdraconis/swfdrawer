@@ -11,25 +11,25 @@ import gl.drawer.GLDrawer;
 
 class GLShapeDrawer extends GLDrawer
 {
-    public var atlas(never, set) : ITextureAtlas;
+    public var atlas(never, set):ITextureAtlas;
 
-    private var myMatrix : Matrix = new Matrix();
+    private var myMatrix:Matrix = new Matrix();
     
-    public function new(atlas : ITextureAtlas, mousePoint : Point)
+    public function new(atlas:ITextureAtlas, mousePoint:Point)
     {
         super(mousePoint);
         
         this.textureAtlas = atlas;
     }
     
-    private function set_atlas(value : ITextureAtlas) : ITextureAtlas
+    private function set_atlas(value:ITextureAtlas):ITextureAtlas
     {
         textureAtlas = value;
         return value;
     }
     
 	@:access(swfdata)
-    override public function draw(drawable : DisplayObjectData, drawingData : swfdrawer.data.DrawingData) : Void
+    override public function draw(drawable:DisplayObjectData, drawingData:swfdrawer.data.DrawingData):Void
     {
         super.draw(drawable, drawingData);
         
@@ -42,7 +42,7 @@ class GLShapeDrawer extends GLDrawer
         
         myMatrix.concat(drawingData.transform);
         
-        var drawableAsShape : ShapeData = cast drawable;
+        var drawableAsShape:ShapeData = cast drawable;
         
         drawRectangle(drawableAsShape._shapeBounds, myMatrix);
         

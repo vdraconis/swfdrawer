@@ -12,25 +12,25 @@ import swfdrawer.data.DrawingData;
 
 class ShapeDrawer extends BitmapDrawer
 {
-    public var atlas(never, set) : ITextureAtlas;
+    public var atlas(never, set):ITextureAtlas;
 	
 	private var draginMatrix:Matrix = new Matrix();
     
-    public function new(atlas : ITextureAtlas, mousePoint : Point)
+    public function new(atlas:ITextureAtlas, mousePoint:Point)
     {
         super(mousePoint);
         
         this.textureAtlas = cast atlas;
     }
     
-    function set_atlas(value : ITextureAtlas) : ITextureAtlas
+    function set_atlas(value:ITextureAtlas):ITextureAtlas
     {
         textureAtlas = cast value;
         return value;
     }
     
 	@:access(swfdata)
-    override public function draw(drawable : DisplayObjectData, drawingData : swfdrawer.data.DrawingData) : Void
+    override public function draw(drawable:DisplayObjectData, drawingData:swfdrawer.data.DrawingData):Void
     {
         super.draw(drawable, drawingData);
         
@@ -41,7 +41,7 @@ class ShapeDrawer extends BitmapDrawer
         
         draginMatrix.concat(drawingData.transform);
         
-        var drawableAsShape : ShapeData = try cast(drawable, ShapeData) catch(e:Dynamic) null;
+        var drawableAsShape:ShapeData = try cast(drawable, ShapeData) catch(e:Dynamic) null;
         
         drawRectangle(drawableAsShape._shapeBounds, draginMatrix);
         

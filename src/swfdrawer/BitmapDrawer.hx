@@ -38,7 +38,7 @@ class BitmapDrawer implements IDrawer
 	public var checkMouseHit:Bool;
 	public var checkBounds:Bool;
 	
-	public function new(mousePoint : Point)
+	public function new(mousePoint:Point)
 	{
 		this.mousePoint = mousePoint;
 		drawingRectagon = new Rectagon(0, 0, 0, 0, drawMatrix);
@@ -63,9 +63,9 @@ class BitmapDrawer implements IDrawer
 	{
 		currentSubTexture = cast textureAtlas.getTexture(textureId);
         
-        var transform : TextureTransform = currentSubTexture._transform;
-        var mulX : Float = transform.positionMultiplierX;
-        var mulY : Float = transform.positionMultiplierY;
+        var transform:TextureTransform = currentSubTexture._transform;
+        var mulX:Float = transform.positionMultiplierX;
+        var mulY:Float = transform.positionMultiplierY;
         
         drawMatrix.a *= mulX;
         drawMatrix.d *= mulY;
@@ -81,8 +81,8 @@ class BitmapDrawer implements IDrawer
 	
 	public static function transformPoint(matrix:Matrix, x:Float, y:Float, noDelta:Bool = false, result:Point = null):Point {
 		
-		var dx:Float = noDelta ? 0 : matrix.tx;
-		var dy:Float = noDelta ? 0 : matrix.ty;
+		var dx:Float = noDelta ? 0:matrix.tx;
+		var dy:Float = noDelta ? 0:matrix.ty;
 		result.x = matrix.a * x + matrix.c * y + dx;
 		result.y = matrix.d * y + matrix.b * x + dy;
 		return result;
@@ -121,10 +121,10 @@ class BitmapDrawer implements IDrawer
 		
 		target.draw(textureAtlas.atlasData, drawMatrix, null, null, clipRect, smooth);
 		
-		var transformedDrawingX : Float = drawingBounds.x * currentSubTexture.transform.scaleX;
-        var transformedDrawingY : Float = drawingBounds.y * currentSubTexture.transform.scaleY;
-        var transformedDrawingWidth : Float = (drawingBounds.width * 2 * currentSubTexture.transform.scaleX) / 2;
-        var transformedDrawingHeight : Float = (drawingBounds.height * 2 * currentSubTexture.transform.scaleY) / 2;
+		var transformedDrawingX:Float = drawingBounds.x * currentSubTexture.transform.scaleX;
+        var transformedDrawingY:Float = drawingBounds.y * currentSubTexture.transform.scaleY;
+        var transformedDrawingWidth:Float = (drawingBounds.width * 2 * currentSubTexture.transform.scaleX) / 2;
+        var transformedDrawingHeight:Float = (drawingBounds.height * 2 * currentSubTexture.transform.scaleY) / 2;
         
         if (checkBounds) 
             drawingRectagon.setTo(transformedDrawingX, transformedDrawingY, transformedDrawingWidth, transformedDrawingHeight);

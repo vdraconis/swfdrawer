@@ -17,12 +17,12 @@ import swfdrawer.data.DrawingData;
 
 class GLDrawer implements IDrawer
 {
-    //public static var grassWind : GrassWind = new GrassWind();
+    //public static var grassWind:GrassWind = new GrassWind();
     
     //TODO: нужно фильтры все сделать единичными инстансами, а данные для них для каждого конркетного объекта наоборот
-    //public var outline : PixelOutline = new PixelOutline();
+    //public var outline:PixelOutline = new PixelOutline();
     
-    //public static var colorFilter : ColorFilterSwitch = new ColorFilterSwitch();
+    //public static var colorFilter:ColorFilterSwitch = new ColorFilterSwitch();
     
     //public static var adjustColor:AdjustColor = new AdjustColor();
     
@@ -65,7 +65,7 @@ class GLDrawer implements IDrawer
         drawingRectagon = new swfdata.Rectagon(0, 0, 0, 0, drawMatrix);
     }
     
-    public function clearMouseHitStatus() : Void
+    public function clearMouseHitStatus():Void
     {
         hitTestResult = false;
     }
@@ -74,15 +74,15 @@ class GLDrawer implements IDrawer
 	 * Apply sub texture draw transform
 	 */
 	@:access(swfdata)
-    public function applyDrawStyle() : Void
+    public function applyDrawStyle():Void
     {
         //trace('apply daraw', textureId);
         
         currentSubTexture = cast textureAtlas.getTexture(textureId);
         
-        var transform : TextureTransform = currentSubTexture._transform;
-        var mulX : Float = transform.positionMultiplierX;
-        var mulY : Float = transform.positionMultiplierY;
+        var transform:TextureTransform = currentSubTexture._transform;
+        var mulX:Float = transform.positionMultiplierX;
+        var mulY:Float = transform.positionMultiplierY;
         
         //TODO: если эта дата считается уже в ShapeLibrary и в итоге сохраняется уже умноженой, то поидеи этот момент не нужен
         /**
@@ -104,13 +104,13 @@ class GLDrawer implements IDrawer
         drawMatrix.c *= mulY;
     }
     
-    public function cleanDrawStyle() : Void
+    public function cleanDrawStyle():Void
     {
         textureId = -1;
         currentSubTexture = null;
     }
     
-    public function draw(drawable : DisplayObjectData, drawingData : swfdrawer.data.DrawingData) : Void
+    public function draw(drawable:DisplayObjectData, drawingData:swfdrawer.data.DrawingData):Void
     {
         
         this.drawingData = drawingData;
@@ -122,9 +122,9 @@ class GLDrawer implements IDrawer
         this.texturePadding2 = textureAtlas.padding * 2;
     }
     
-	inline public function hitTest(pixelPerfect : Bool, texture : GLSubTexture, transformedDrawingX : Float, transformedDrawingY : Float, transformedDrawingWidth : Float, transformedDrawingHeight : Float, transformedPoint : Point) : Bool
+	inline public function hitTest(pixelPerfect:Bool, texture:GLSubTexture, transformedDrawingX:Float, transformedDrawingY:Float, transformedDrawingWidth:Float, transformedDrawingHeight:Float, transformedPoint:Point):Bool
     {
-        var isHit : Bool = false;
+        var isHit:Bool = false;
         
         if (transformedPoint.x > transformedDrawingX && transformedPoint.x < transformedDrawingX + transformedDrawingWidth) 
             if (transformedPoint.y > transformedDrawingY && transformedPoint.y < transformedDrawingY + transformedDrawingHeight) 
@@ -132,8 +132,8 @@ class GLDrawer implements IDrawer
         
         if (pixelPerfect && isHit) 
         {
-            var u : Float = (transformedPoint.x - transformedDrawingX) / (transformedDrawingWidth + texturePadding2);
-            var v : Float = (transformedPoint.y - transformedDrawingY) / (transformedDrawingHeight + texturePadding2);
+            var u:Float = (transformedPoint.x - transformedDrawingX) / (transformedDrawingWidth + texturePadding2);
+            var v:Float = (transformedPoint.y - transformedDrawingY) / (transformedDrawingHeight + texturePadding2);
             
             isHit = texture.getAlphaAtUV(u, v) > 0x05;
         }
@@ -142,10 +142,10 @@ class GLDrawer implements IDrawer
     }
     
     
-    inline public function setMaskData() : Void
+    inline public function setMaskData():Void
     {
-        /*var isMask : Bool = drawingData.isMask;
-        var isMasked : Bool = drawingData.isMasked;
+        /*var isMask:Bool = drawingData.isMask;
+        var isMasked:Bool = drawingData.isMasked;
         
         if (isMask) 
             Genome2D.g2d_instance.g2d_context.renderToStencil(1)
@@ -156,14 +156,14 @@ class GLDrawer implements IDrawer
         }*/
     }
     
-    public function clearMaskData() : Void
+    public function clearMaskData():Void
     {
         //if (drawingData.isMask) 
         //    Genome2D.g2d_instance.g2d_context.renderToColor(1);
     }
     
 	@:access(swfdata)
-    public function drawRectangle(drawingBounds : Rectangle, transform : Matrix) : Void
+    public function drawRectangle(drawingBounds:Rectangle, transform:Matrix):Void
     {
         drawMatrix.identity();
         drawMatrix.concat(transform);
@@ -180,14 +180,14 @@ class GLDrawer implements IDrawer
         
         setMaskData();
         
-        var filter : GLFilter = null;
+        var filter:GLFilter = null;
         
         //if (isUseGrassWind)
         //	filter = grassWind;
         
         //filter = outline;
         
-        //var filteringType : Int = GLTextureFilteringType.NEAREST;
+        //var filteringType:Int = GLTextureFilteringType.NEAREST;
         
         //if (smooth) 
         //    filteringType = GLTextureFilteringType.LINEAR;
@@ -195,9 +195,9 @@ class GLDrawer implements IDrawer
         //if (filteringType != texture.g2d_filteringType) 
         //    texture.g2d_filteringType = filteringType;
         
-        var isMask : Bool = drawingData.isMask;
+        var isMask:Bool = drawingData.isMask;
         
-        var color : ColorData = drawingData.colorData;
+        var color:ColorData = drawingData.colorData;
         
         //if (drawingData.isApplyColorTrasnform) 
         //{
@@ -228,10 +228,10 @@ class GLDrawer implements IDrawer
         //clearMaskData();
         
         //transform mesh bounds to deformed mesh
-        var transformedDrawingX : Float = drawingBounds.x * currentSubTexture.transform.scaleX;
-        var transformedDrawingY : Float = drawingBounds.y * currentSubTexture.transform.scaleY;
-        var transformedDrawingWidth : Float = (drawingBounds.width * 2 * currentSubTexture.transform.scaleX) / 2;
-        var transformedDrawingHeight : Float = (drawingBounds.height * 2 * currentSubTexture.transform.scaleY) / 2;
+        var transformedDrawingX:Float = drawingBounds.x * currentSubTexture.transform.scaleX;
+        var transformedDrawingY:Float = drawingBounds.y * currentSubTexture.transform.scaleY;
+        var transformedDrawingWidth:Float = (drawingBounds.width * 2 * currentSubTexture.transform.scaleX) / 2;
+        var transformedDrawingHeight:Float = (drawingBounds.height * 2 * currentSubTexture.transform.scaleY) / 2;
         
 		if (!isMask && checkBounds || isDebugDraw) 
             drawingRectagon.setTo(transformedDrawingX, transformedDrawingY, transformedDrawingWidth, transformedDrawingHeight);

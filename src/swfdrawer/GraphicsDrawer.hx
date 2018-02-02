@@ -37,7 +37,7 @@ class GraphicsDrawer implements IDrawer
 	public var checkMouseHit:Bool;
 	public var checkBounds:Bool;
 
-	public function new(mousePoint : Point)
+	public function new(mousePoint:Point)
 	{
 		this.mousePoint = mousePoint;
 		drawingRectagon = new Rectagon(0, 0, 0, 0, drawMatrix);
@@ -62,9 +62,9 @@ class GraphicsDrawer implements IDrawer
 	{
 		currentSubTexture = cast textureAtlas.getTexture(textureId);
         
-        var transform : TextureTransform = currentSubTexture._transform;
-        var mulX : Float = transform.positionMultiplierX;
-        var mulY : Float = transform.positionMultiplierY;
+        var transform:TextureTransform = currentSubTexture._transform;
+        var mulX:Float = transform.positionMultiplierX;
+        var mulY:Float = transform.positionMultiplierY;
         
         drawMatrix.a *= mulX;
         drawMatrix.d *= mulY;
@@ -80,8 +80,8 @@ class GraphicsDrawer implements IDrawer
 	
 	public static function transformPoint(matrix:Matrix, x:Float, y:Float, noDelta:Bool = false, result:Point = null):Point {
 		
-		var dx:Float = noDelta ? 0 : matrix.tx;
-		var dy:Float = noDelta ? 0 : matrix.ty;
+		var dx:Float = noDelta ? 0:matrix.tx;
+		var dy:Float = noDelta ? 0:matrix.ty;
 		result.x = matrix.a * x + matrix.c * y + dx;
 		result.y = matrix.d * y + matrix.b * x + dy;
 		return result;

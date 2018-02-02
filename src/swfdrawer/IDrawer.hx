@@ -9,5 +9,5 @@ import swfdrawer.data.DrawingData;
 interface IDrawer
 {
 
-    function draw(drawable : DisplayObjectData, drawingData : swfdrawer.data.DrawingData) : Void;
+    function draw(drawable:DisplayObjectData, drawingData:swfdrawer.data.DrawingData):Void;
 }

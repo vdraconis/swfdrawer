@@ -5,11 +5,11 @@ import flash.geom.Matrix;
 
 class DrawerMatrixPool
 {
-    public static var instance(get, never) : DrawerMatrixPool;
+    public static var instance(get, never):DrawerMatrixPool;
 
-    private static var _instance : DrawerMatrixPool;
+    private static var _instance:DrawerMatrixPool;
     
-    private static function get_instance() : DrawerMatrixPool
+    private static function get_instance():DrawerMatrixPool
     {
         if (_instance == null) 
             _instance = new DrawerMatrixPool();
@@ -17,8 +17,8 @@ class DrawerMatrixPool
         return _instance;
     }
     
-    private var count : Int = 0;
-    private var matricesPool : Array<Matrix> = new Array<Matrix>();
+    private var count:Int = 0;
+    private var matricesPool:Array<Matrix> = new Array<Matrix>();
     
     public function new()
     {
@@ -26,7 +26,7 @@ class DrawerMatrixPool
         
     }
     
-    public function getMatrix() : Matrix
+    public function getMatrix():Matrix
     {
         if (count > 0) 
         {
@@ -39,7 +39,7 @@ class DrawerMatrixPool
         }
     }
     
-    public function disposeMatrix(matrix : Matrix) : Void
+    public function disposeMatrix(matrix:Matrix):Void
     {
         matricesPool[count++] = matrix;
     }

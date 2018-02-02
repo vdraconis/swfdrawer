@@ -19,29 +19,29 @@ import swfdrawer.data.DrawingData;
 
 class GLDisplayListDrawer implements IDrawer
 {
-    public var atlas(never, set) : ITextureAtlas;
-    public var checkBounds(never, set) : Bool;
-    public var checkMouseHit(never, set) : Bool;
-    public var debugDraw(never, set) : Bool;
-    public var isHitMouse(get, never) : Bool;
-    public var hightlightSize(get, set) : Int;
-    public var hightlight(never, set) : Bool;
-    public var grassWind(get, set) : Bool;
-    public var debugConvas(never, set) : Graphics;
-    public var smooth(never, set) : Bool;
+    public var atlas(never, set):ITextureAtlas;
+    public var checkBounds(never, set):Bool;
+    public var checkMouseHit(never, set):Bool;
+    public var debugDraw(never, set):Bool;
+    public var isHitMouse(get, never):Bool;
+    public var hightlightSize(get, set):Int;
+    public var hightlight(never, set):Bool;
+    public var grassWind(get, set):Bool;
+    public var debugConvas(never, set):Graphics;
+    public var smooth(never, set):Bool;
 	
 	@:isVar
 	public var target(get, set):Renderer;
 
-    var drawersMap : Map<Int, IDrawer> = new Map<Int, IDrawer>();
-    private var mousePoint : Point;
-    private var shapeDrawer : GLShapeDrawer;
+    var drawersMap:Map<Int, IDrawer> = new Map<Int, IDrawer>();
+    private var mousePoint:Point;
+    private var shapeDrawer:GLShapeDrawer;
     
-    private var drawingData : DrawingData = new DrawingData();
+    private var drawingData:DrawingData = new DrawingData();
     
-    private var _atlas : ITextureAtlas;
+    private var _atlas:ITextureAtlas;
     
-    public function new(atlas : ITextureAtlas = null, mousePoint : Point = null)
+    public function new(atlas:ITextureAtlas = null, mousePoint:Point = null)
     {
         this.mousePoint = mousePoint;
         
@@ -49,7 +49,7 @@ class GLDisplayListDrawer implements IDrawer
         initialize();
     }
     
-    private function set_atlas(atlas : ITextureAtlas) : ITextureAtlas
+    private function set_atlas(atlas:ITextureAtlas):ITextureAtlas
     {
         _atlas = atlas;
         shapeDrawer.atlas = atlas;
@@ -59,7 +59,7 @@ class GLDisplayListDrawer implements IDrawer
     /**
 		 * Define is drawer should calculate full bound of object - Union of bound for every child
 		 */
-    private function set_checkBounds(value : Bool) : Bool
+    private function set_checkBounds(value:Bool):Bool
     {
         shapeDrawer.checkBounds = value;
         return value;
@@ -69,7 +69,7 @@ class GLDisplayListDrawer implements IDrawer
 		 * Define is drawer should do mouse hit test
 		 * 
 		 */
-    private function set_checkMouseHit(value : Bool) : Bool
+    private function set_checkMouseHit(value:Bool):Bool
     {
         shapeDrawer.checkMouseHit = value;
         return value;
@@ -78,37 +78,37 @@ class GLDisplayListDrawer implements IDrawer
     /**
 		 * Define is drawer should draw debug data
 		 */
-    private function set_debugDraw(value : Bool) : Bool
+    private function set_debugDraw(value:Bool):Bool
     {
         shapeDrawer.isDebugDraw = value;
         return value;
     }
     
-    private function get_isHitMouse() : Bool
+    private function get_isHitMouse():Bool
     {
         return shapeDrawer.hitTestResult;
     }
     
-    private function initialize() : Void
+    private function initialize():Void
     {
         shapeDrawer = new GLShapeDrawer(_atlas, mousePoint);
         
-        var spriteDrawer : SpriteDrawer = new SpriteDrawer(this);
-        var movieClipDrawer : MovieClipDrawer = new MovieClipDrawer(this);
+        var spriteDrawer:SpriteDrawer = new SpriteDrawer(this);
+        var movieClipDrawer:MovieClipDrawer = new MovieClipDrawer(this);
         
         drawersMap[DisplayObjectTypes.SHAPE_TYPE] = shapeDrawer;
         drawersMap[DisplayObjectTypes.SPRITE_TYPE] = spriteDrawer;
         drawersMap[DisplayObjectTypes.MOVIE_CLIP_TYPE] = movieClipDrawer;
     }
     
-    public function clear() : Void
+    public function clear():Void
     {
         shapeDrawer.clearMouseHitStatus();
         drawingData.clear();
     }
     
 	@:access(swfdata)
-    public function drawDisplayObject(displayObject : DisplayObjectData, transform : Matrix, bound : Rectangle = null, colorData : ColorData = null) : Void
+    public function drawDisplayObject(displayObject:DisplayObjectData, transform:Matrix, bound:Rectangle = null, colorData:ColorData = null):Void
     {
         clear();
         
@@ -124,11 +124,11 @@ class GLDisplayListDrawer implements IDrawer
     }
     
 	@:access(swfdata)
-    public function draw(displayObject : DisplayObjectData, drawingData : DrawingData) : Void
+    public function draw(displayObject:DisplayObjectData, drawingData:DrawingData):Void
     {
-        var type : Int = displayObject.displayObjectType;
+        var type:Int = displayObject.displayObjectType;
         
-        var drawer : IDrawer = drawersMap[type];
+        var drawer:IDrawer = drawersMap[type];
         
         if (drawer != null) 
             drawer.draw(displayObject, drawingData)
@@ -136,11 +136,11 @@ class GLDisplayListDrawer implements IDrawer
         throw new Error("drawer for " + displayObject + " is not defined");
     }
     
-    public function setHightlightColor(value : Int, alpha : Float) : Void
+    public function setHightlightColor(value:Int, alpha:Float):Void
     {
-        var r : Float = ((value >> 16) & 0xFF) / 0xFF;
-        var g : Float = ((value >> 8) & 0xFF) / 0xFF;
-        var b : Float = (value & 0xFF) / 0xFF;
+        var r:Float = ((value >> 16) & 0xFF) / 0xFF;
+        var g:Float = ((value >> 8) & 0xFF) / 0xFF;
+        var b:Float = (value & 0xFF) / 0xFF;
         
         //shapeDrawer.outline.red = r;
         //shapeDrawer.outline.green = g;
@@ -148,31 +148,31 @@ class GLDisplayListDrawer implements IDrawer
         //shapeDrawer.outline.alpha = alpha;
     }
     
-    private function get_hightlightSize() : Int
+    private function get_hightlightSize():Int
     {
         return 0;// shapeDrawer.outline.size;
     }
     
-    private function set_hightlightSize(value : Int) : Int
+    private function set_hightlightSize(value:Int):Int
     {
         //shapeDrawer.outline.size = value;
         return value;
     }
     
-    private function set_hightlight(value : Bool) : Bool
+    private function set_hightlight(value:Bool):Bool
     {
         shapeDrawer.hightlight = value;
         return value;
     }
     
     //TODO: Вынести такие штуки в парамтеры фильтров в DisplayObject
-    private function set_grassWind(value : Bool) : Bool
+    private function set_grassWind(value:Bool):Bool
     {
         shapeDrawer.isUseGrassWind = value;
         return value;
     }
     
-    private function get_grassWind() : Bool
+    private function get_grassWind():Bool
     {
         return shapeDrawer.isUseGrassWind;
     }
@@ -180,14 +180,14 @@ class GLDisplayListDrawer implements IDrawer
     /**
 		 * Задает таргет для отрисовки дебаг даты
 		 */
-    private function set_debugConvas(value : Graphics) : Graphics
+    private function set_debugConvas(value:Graphics):Graphics
     {
         shapeDrawer.convas = value;
         return value;
     }
     
     //Фильтринг linear, nearest
-    private function set_smooth(value : Bool) : Bool
+    private function set_smooth(value:Bool):Bool
     {
         shapeDrawer.smooth = value;
         return value;

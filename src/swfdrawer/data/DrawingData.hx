@@ -12,20 +12,20 @@ import swfdata.SwfdataInner;
 
 class DrawingData
 {
-    private var isClear : Bool = true;
+    private var isClear:Bool = true;
     
-    public var bound : Rectangle = null;
+    public var bound:Rectangle = null;
     
-    public var maskId : Int = -1;
-    public var isMask : Bool = false;
-    public var isMasked : Bool = false;
+    public var maskId:Int = -1;
+    public var isMask:Bool = false;
+    public var isMasked:Bool = false;
     
-    public var transform : Matrix = null;
+    public var transform:Matrix = null;
     
-    public var isApplyColorTrasnform : Bool = false;
-    public var colorTransform : ColorMatrix = new ColorMatrix(null);
+    public var isApplyColorTrasnform:Bool = false;
+    public var colorTransform:ColorMatrix = new ColorMatrix(null);
     
-    public var colorData : ColorData = new ColorData();
+    public var colorData:ColorData = new ColorData();
     
     public function new()
     {
@@ -33,14 +33,14 @@ class DrawingData
         
     }
     
-    public function addColorTransform(colorTransformToApply : ColorMatrix) : Void
+    public function addColorTransform(colorTransformToApply:ColorMatrix):Void
     {
         isApplyColorTrasnform = true;
         //this.colorTransform.reset();
         this.colorTransform.premultiply(colorTransformToApply.matrix);
     }
     
-    public function clear() : Void
+    public function clear():Void
     {
         //if (isClear == false)
         //	return;
@@ -58,13 +58,13 @@ class DrawingData
         bound = null;
     }
     
-    public function mulColorData(colorData : ColorData) : Void
+    public function mulColorData(colorData:ColorData):Void
     {
         //isClear = false;
         this.colorData.mulColorData(colorData);
     }
     
-    public function setFromDisplayObject(drawable : DisplayObjectData) : Void
+    public function setFromDisplayObject(drawable:DisplayObjectData):Void
     {
         //isClear = false;
         
