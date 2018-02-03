@@ -133,7 +133,7 @@ class GLDisplayListDrawer implements IDrawer
         if (drawer != null) 
             drawer.draw(displayObject, drawingData)
         else 
-        throw new Error("drawer for " + displayObject + " is not defined");
+			throw new Error("drawer for " + displayObject + " is not defined");
     }
     
     public function setHightlightColor(value:Int, alpha:Float):Void

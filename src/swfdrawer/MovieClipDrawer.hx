@@ -43,7 +43,8 @@ class MovieClipDrawer implements IDrawer
         var currentMaskState:Bool = drawingData.isMask;
         var currentMaskedState:Bool = drawingData.isMasked;
         
-        for (i in 0...objectsLenght){
+        for (i in 0...objectsLenght) 
+		{
             var childDisplayObject:DisplayObjectData = frameData.displayObjects[i];
             
             drawingData.transform = drawableTransformClone;
